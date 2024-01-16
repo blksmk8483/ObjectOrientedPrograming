@@ -125,25 +125,77 @@
 // - Data car 2: 'Mercedes' going at 95 km/h
 // GOOD LUCK 😀
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
-console.log(Car);
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
+// console.log(Car);
 
-const car1 = new Car('BMW', 120);
-const car2 = new Car('Mercedes', 95);
-console.log(car1, car2);
+// const car1 = new Car('BMW', 120);
+// const car2 = new Car('Mercedes', 95);
+// console.log(car1, car2);
 
-Car.prototype.acc = function () {
-  console.log(`${this.make} is going at ${this.speed + 10}km/h`);
-};
+// Car.prototype.acc = function () {
+//   console.log(`${this.make} is going at ${this.speed + 10}km/h`);
+// };
 
-Car.prototype.brake = function () {
-  console.log(`${this.make} is going at${this.speed - 5}km/h`);
-};
+// Car.prototype.brake = function () {
+//   console.log(`${this.make} is going at${this.speed - 5}km/h`);
+// };
 
-car1.acc();
-car1.brake();
-car2.acc();
-car2.brake();
+// car1.acc();
+// car1.brake();
+// car2.acc();
+// car2.brake();
+
+// ========================================================
+// ========================================================
+// ========================================================
+// ----------   ES6 CLASSES   ----------
+// ========================================================
+// ========================================================
+// ========================================================
+
+// class expression
+// const PersonCL = class {};
+
+// class declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+}
+
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+
+console.log(jessica.__proto__ === PersonCl.prototype);
+
+// PersonCl.prototype.greet = function () {
+//   console.log(`Hey ${this.firstName}`);
+// };
+
+jessica.greet();
+
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
+
+// ========================================================
+// ========================================================
+// ========================================================
+// ----------   SETTERS AND GETTERS   ----------
+// ========================================================
+// ========================================================
+// ========================================================
