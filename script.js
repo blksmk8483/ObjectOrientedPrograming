@@ -10,37 +10,37 @@
 
 // // Constructor functions in practice use a capitol letter, doesn't actually do anything.
 
-// const Person = function (firstName, birthYear) {
-//   // Instance properties
-//   this.firstName = firstName;
-//   this.birthYear = birthYear;
+const Person = function (firstName, birthYear) {
+  // Instance properties
+  this.firstName = firstName;
+  this.birthYear = birthYear;
 
-//   // Never create a method inside a constructor function
-//   // this.calcAge = function () {
-//   //   console.log(2037 - this.birthYear);
-//   // };
-// };
+  // Never create a method inside a constructor function
+  // this.calcAge = function () {
+  //   console.log(2037 - this.birthYear);
+  // };
+};
 
-// const brandon = new Person('Brandon', 1984);
-// console.log(brandon);
+const brandon = new Person('Brandon', 1984);
+console.log(brandon);
 
-// const Person1 = function (firstName, birthYear) {
-//   this.first = firstName;
-//   this.BobsYourUncle = birthYear;
-// };
+const Person1 = function (firstName, birthYear) {
+  this.first = firstName;
+  this.BobsYourUncle = birthYear;
+};
 
-// const brandon1 = new Person1('Brandon', 1984);
-// console.log(brandon1);
+const brandon1 = new Person1('Brandon', 1984);
+console.log(brandon1);
 
-// // 1. New empty object is created {}
-// // 2. function is called, this = {}
-// // 3. {} linked to prototype
-// // 4. function automatcially returns {}
+// 1. New empty object is created {}
+// 2. function is called, this = {}
+// 3. {} linked to prototype
+// 4. function automatcially returns {}
 
-// const matilda = new Person('Matilda', 2017);
-// const jack = new Person('Jack', 1908);
+const matilda = new Person('Matilda', 2017);
+const jack = new Person('Jack', 1908);
 
-// console.log(matilda, jack);
+console.log(matilda, jack);
 
 // ========================================================
 // ========================================================
@@ -161,8 +161,8 @@
 
 // class declaration
 class PersonCl {
-  constructor(firstName, birthYear) {
-    this.firstName = firstName;
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
     this.birthYear = birthYear;
   }
 
@@ -172,13 +172,32 @@ class PersonCl {
   }
 
   greet() {
-    console.log(`Hey ${this.firstName}`);
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log('Hey there 👋');
   }
 }
 
-const jessica = new PersonCl('Jessica', 1996);
+const jessica = new PersonCl('Jessica Davis', 1996);
 console.log(jessica);
 jessica.calcAge();
+console.log(jessica.age);
 
 console.log(jessica.__proto__ === PersonCl.prototype);
 
@@ -192,6 +211,9 @@ jessica.greet();
 // 2. Classes are first-class citizens
 // 3. Classes are executed in strict mode
 
+// const walter = new PersonCl('Walter', 1996);
+const walter = new PersonCl('Walter White', 1996);
+
 // ========================================================
 // ========================================================
 // ========================================================
@@ -199,3 +221,37 @@ jessica.greet();
 // ========================================================
 // ========================================================
 // ========================================================
+
+const account = {
+  owner: 'Brandon',
+  movements: [200, 530, 120, 300],
+
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.latest);
+
+account.latest = 50;
+console.log(account.movements);
+
+// ========================================================
+// ========================================================
+// ========================================================
+// ----------   STATIC METHODS   ----------
+// ========================================================
+// ========================================================
+// ========================================================
+
+Person.hey = function () {
+  console.log('Hey there 👋');
+};
+
+Person.hey();
+
+PersonCl.hey();
