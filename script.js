@@ -255,3 +255,74 @@ Person.hey = function () {
 Person.hey();
 
 PersonCl.hey();
+
+// ========================================================
+// ========================================================
+// ========================================================
+// ----------   OBJECT.CREATE   ----------
+// ========================================================
+// ========================================================
+// ========================================================
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const brandon7 = Object.create(PersonProto);
+console.log(brandon7);
+
+brandon7.name = 'Brandon';
+brandon7.birthYear = 2002;
+brandon7.calcAge();
+
+console.log(brandon7.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init('Sarah', 1979);
+sarah.calcAge();
+
+// ========================================================
+// ========================================================
+// ========================================================
+// ----------   CODING CHALLENGE #2   ----------
+// ========================================================
+// ========================================================
+// ========================================================
+
+// Your tasks:
+// 1. Re-create Challenge #1,but this time using an ES6 class(call it 'CarCl')
+// 2. Add a getter called 'speedUS' which returns the current speed in mi/h (divide by 1.6)
+// 3. Add a setter called 'speedUS' which sets the current speed in mi/h (but converts it to km/h before storing the value, by multiplying the input by 1.6)
+// 4. Create a new car and experiment with the 'accelerate' and 'brake' methods, and with the getter and setter.
+// Test data:
+// - Data car 1: 'Ford' going at 120 km/h
+// GOOD LUCK 😀
+
+class CarlCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  get speedUS() {
+    const usSpeed = this.speed / 1.6;
+    return `'${this.make}' going at ${usSpeed} mi/h`;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+    return `'${this.make}' going at ${speed} mi/h`;
+  }
+}
+
+const car1 = new CarlCl('Ford', 120);
+console.log(car1.speedUS);
+
+car1.speedUS = 50;
+console.log(car1);
